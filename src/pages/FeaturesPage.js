@@ -4,10 +4,10 @@ import Features from '../containers/Features'
 
 function FeaturesPage() {
     return (
-        <div>
-        <Navbar/>
+      <div>
+        <Navbar />
         <Features />
-        FeaturesPageqw
+        <h1>FeaturesPage</h1>
       </div>
     );
 }
