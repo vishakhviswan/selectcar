@@ -1,27 +1,42 @@
-import React, { useState } from "react";
-import { Container, Dropdown, DropdownButton } from "react-bootstrap";
-import i10safety from "../data";
+import React, { useEffect, useState } from "react";
+import { Container, Dropdown, DropdownButton, ListGroup } from "react-bootstrap";
+import data from "../data/Nios"
 
 import "./ContainerStyles.css";
 function Features() {
 
-  console.log("data", i10safety[0].subheading, i10safety);
+  const [modelBtnName, setModelBtnName] = useState("Model");
+  const [variantBtnName, setVariantBtnName] = useState("Variants")
+
+  console.log("data", data);
 
   const [variants, setvariants] = useState([]);
+  const [dtls, setDtls] = useState([])
+  
+  
   const handleModelBtn = (e) => {
     setvariants([""]);
+    setModelBtnName("Model");
     console.log("name", e.target.name);
     if (e.target.name === "Grand i10 Nios") {
+      setModelBtnName(e.target.name)
       setvariants(["ERA", "MAGNA", "SPORTZ", "TURBO", "ASTA"]);
+
     } else if (e.target.name === "The All New i20") {
+      setModelBtnName(e.target.name);
       setvariants(["Magna", "Sports", "Asta", "Asta (O)"]);
+
     } else if (e.target.name === "Venue") {
       setvariants(["E", "S", "S+", "S(O)", "SX", "SX(O)"]);
+      setModelBtnName(e.target.name);
     } else if (e.target.name === "Verna") {
+      setModelBtnName(e.target.name);
       setvariants(["E", "S+", "SX", "SX(O)", "SX(O)Turbo"]);
     } else if (e.target.name === "Creta") {
+      setModelBtnName(e.target.name);
       setvariants(["E", "EX", "S", "SX EXECUTIVE", "SX", "SX(O)"]);
     } else if (e.target.name === "Alcazar") {
+      setModelBtnName(e.target.name);
       setvariants([
         "Prestige MT",
         "Prestige (O) AT",
@@ -32,6 +47,17 @@ function Features() {
       ]);
     }
   };
+
+  const handleVariantBtn = (e) => {
+    setVariantBtnName(e.target.name)
+    console.log("variant", e.target);
+    if (modelBtnName === "Grand i10 Nios" && e.target.name === "ERA") {
+      (data.map((obj) =>
+      setDtls(obj.era)))
+      console.log("sdfgdgfdg",dtls);
+      alert(true)
+    }
+  }
   return (
     <div className="features-ParentDiv">
       <div className="features-ChildDiv">
@@ -45,8 +71,9 @@ function Features() {
               <Dropdown.Toggle
                 id="dropdown-button-dark-example1"
                 variant="secondary"
+                title={modelBtnName}
               >
-                Model
+                {modelBtnName}
               </Dropdown.Toggle>
 
               <Dropdown.Menu variant="dark">
@@ -103,19 +130,38 @@ function Features() {
               id="dropdown-button-dark-example2"
               variant="secondary"
               menuVariant="dark"
-              title="Variant"
+              title={variantBtnName}
               className="mt-2"
             >
               {variants.map((obj) => (
-                <Dropdown.Item href="#/action-1">{obj}</Dropdown.Item>
+                <Dropdown.Item onClick={handleVariantBtn} name={obj} href="#/action-1">
+                  {obj}
+                </Dropdown.Item>
               ))}
             </DropdownButton>
           </div>
           <div className="features-content">
-            <h1>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
-              molestiae, similique in temporibus sed adipisci necessitatibus
-            </h1>
+            {/* posts.map(post =>
+            <div>
+              <h3>{post.question}</h3>
+              <ul>
+                {post.options.map((option) => (
+                  <li>{option.title}</li>
+                ))}
+              </ul>
+            </div>
+            ) */}
+            {dtls.map((obj) => (
+              <ListGroup>
+                <ListGroup.Item variant="danger" className="featuresHeading">
+                  {obj.subheading}
+                </ListGroup.Item>
+
+                {obj.features.map((list) => (
+                  <ListGroup.Item variant="primary">{list} </ListGroup.Item>
+                ))}
+              </ListGroup>
+            ))}
           </div>
         </Container>
       </div>
