@@ -2,8 +2,8 @@
 /* Features */
 .features-ChildDiv {
   width: 100%;
-  height: 100vh;
-  height: max-content !important;
+  height: 100vh max-content;
+  min-height: 100vh;
   background-color: rgb(124, 122, 126);
 }
 
@@ -34,4 +34,9 @@ h1{
 } */
 .list-group-item{
   text-align: center;
+}
+
+/* Products */
+.Products-ChildDiv{
+  margin-top: 2rem;
 }

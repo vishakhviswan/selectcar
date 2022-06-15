@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Container, Dropdown, DropdownButton, ListGroup } from "react-bootstrap";
 import data from "../data/Nios"
 
 import "./ContainerStyles.css";
 function Features() {
-
   const [modelBtnName, setModelBtnName] = useState("Model");
   const [variantBtnName, setVariantBtnName] = useState("Variants")
 
-  console.log("data", data);
 
   const [variants, setvariants] = useState([]);
-  const [dtls, setDtls] = useState([])
+  const [dtls, setDtls] = useState([]) 
   
   
   const handleModelBtn = (e) => {
+    setDtls([]);
     setvariants([""]);
     setModelBtnName("Model");
     console.log("name", e.target.name);
@@ -49,18 +48,23 @@ function Features() {
   };
 
   const handleVariantBtn = (e) => {
+    setDtls([]);
     setVariantBtnName(e.target.name)
     console.log("variant", e.target);
     if (modelBtnName === "Grand i10 Nios" && e.target.name === "ERA") {
       (data.map((obj) =>
       setDtls(obj.era)))
-      console.log("sdfgdgfdg",dtls);
-      alert(true)
     }
+    else if (modelBtnName === "Grand i10 Nios" && e.target.name === "MAGNA") {
+      data.map((obj) => setDtls(obj.magna));
+    } else {
+      
+          }
   }
   return (
     <div className="features-ParentDiv">
       <div className="features-ChildDiv">
+        <div className="sample"></div>
         <Container>
           <div className="features-title">Features</div>
           <div className="features-subtitle">
@@ -134,25 +138,22 @@ function Features() {
               className="mt-2"
             >
               {variants.map((obj) => (
-                <Dropdown.Item onClick={handleVariantBtn} name={obj} href="#/action-1">
+                <Dropdown.Item
+                  onClick={handleVariantBtn}
+                  name={obj}
+                  href="#/action-1"
+                >
                   {obj}
                 </Dropdown.Item>
               ))}
             </DropdownButton>
           </div>
           <div className="features-content">
-            {/* posts.map(post =>
-            <div>
-              <h3>{post.question}</h3>
-              <ul>
-                {post.options.map((option) => (
-                  <li>{option.title}</li>
-                ))}
-              </ul>
-            </div>
-            ) */}
             {dtls.map((obj) => (
               <ListGroup>
+                <ListGroup.Item variant="danger" className="featuresHeading">
+                  {obj.heading}
+                </ListGroup.Item>
                 <ListGroup.Item variant="danger" className="featuresHeading">
                   {obj.subheading}
                 </ListGroup.Item>
@@ -165,7 +166,6 @@ function Features() {
           </div>
         </Container>
       </div>
-      Features Container
     </div>
   );
 }
