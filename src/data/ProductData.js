@@ -4,6 +4,7 @@ export default [
     subTitle:
       "The all-new i20 - With its ‘BORN MAGNETIC’ attributes leaving an unforgettable impression",
     image: "assets/images/i20(1).jpg",
+    price:"7,03,000"
   },
   {
     productTitle: "Grand i10 NIOS",

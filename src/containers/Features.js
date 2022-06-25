@@ -1,5 +1,5 @@
 import React, {  useState } from "react";
-import { Container, Dropdown, DropdownButton, ListGroup } from "react-bootstrap";
+import { Container, Dropdown, DropdownButton, ListGroup, ListGroupItem } from "react-bootstrap";
 import data from "../data/Nios"
 
 import "./ContainerStyles.css";
@@ -56,17 +56,23 @@ function Features() {
       setDtls(obj.era)))
     }
     else if (modelBtnName === "Grand i10 Nios" && e.target.name === "MAGNA") {
-      data.map((obj) => setDtls(obj.magna));
-    } else {
-      
-          }
+           data.map((obj) => setDtls(obj.magna));
+         } else if (
+           modelBtnName === "Grand i10 Nios" &&
+           e.target.name === "SPORTZ"
+         ) {
+           data.map((obj) => setDtls(obj.sportz));
+         } else {
+         }
   }
   return (
     <div className="features-ParentDiv">
       <div className="features-ChildDiv">
         <div className="sample"></div>
         <Container>
-          <div className="features-title">Features</div>
+          <div className="features-title">
+            <h3>Features</h3>
+          </div>
           <div className="features-subtitle">
             See your exciting features here!
           </div>
@@ -149,20 +155,33 @@ function Features() {
             </DropdownButton>
           </div>
           <div className="features-content">
-            {dtls.map((obj) => (
-              <ListGroup>
-                <ListGroup.Item variant="danger" className="featuresHeading">
-                  {obj.heading}
-                </ListGroup.Item>
-                <ListGroup.Item variant="danger" className="featuresHeading">
-                  {obj.subheading}
-                </ListGroup.Item>
+            <div className="features__content2">
+              {dtls.map((obj) => (
+                <h5>{obj.heading}</h5>
+              ))}
+              <h5>{dtls.heading}</h5>
+              {dtls.map((obj) => (
+                <ListGroup>
+                  {obj.heading2 ? (
+                    <ListGroup.Item
+                      variant="danger"
+                      className="featuresHeading"
+                    >
+                      {obj.heading2}
+                    </ListGroup.Item>
+                  ) : (
+                    ""
+                  )}
+                  <ListGroup.Item variant="danger" className="featuresHeading">
+                    {obj.subheading}
+                  </ListGroup.Item>
 
-                {obj.features.map((list) => (
-                  <ListGroup.Item variant="primary">{list} </ListGroup.Item>
-                ))}
-              </ListGroup>
-            ))}
+                  {obj.features.map((list) => (
+                    <ListGroup.Item variant="primary">{list} </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              ))}
+            </div>
           </div>
         </Container>
       </div>
